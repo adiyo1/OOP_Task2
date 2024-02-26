@@ -1,11 +1,9 @@
 from Post import Post, TextPost, ImagePost, SalePost
 from abc import ABCMeta, abstractmethod
 
-
 # User.py
 
 # from Observers import NewPostObserver, LikeObserver, CommentObserver
-
 
 class User:
 
@@ -64,9 +62,9 @@ class User:
 
 
     def unfollow(self,username):
-        if username in self._follows:
-            self._follows.remove(username)
-            username.num_followers -=1
+        if self in username._follows:
+            username._follows.remove(self)
+            self.num_followers -=1
             #self.my_notification.remove(username)
             print(f"{self.username} unfollowed {username.username}")
 

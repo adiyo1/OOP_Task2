@@ -136,4 +136,3 @@ class SalePost(Post):
             self.available= False
             print(f"{self.name.username}'s product is sold")
 
-
