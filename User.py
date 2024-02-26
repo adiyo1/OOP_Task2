@@ -10,6 +10,7 @@ from abc import ABCMeta, abstractmethod
 class User:
 
     def __init__(self, username, password):
+
         self.username = username
         self.password = password
         self._follows = []
@@ -72,15 +73,17 @@ class User:
 
     def follow(self, fusername):
         newf = fusername.username
-        if fusername in self._follows:
+        if self in fusername._follows:
             print(f"User '{newf}' is already being followed.")
             return None
 
         # Create a new user and store it in the dictionary
-        self._follows.append(fusername)
-        fusername.num_followers +=1
-        print(f"{self.username} started following {newf}")
-        return None
+        else:
+            fusername._follows.append(self)
+            #self._follows.append(fusername)
+            fusername.num_followers +=1
+            print(f"{self.username} started following {newf}")
+            return None
 
 #    def publish_post(self, post_type, content, *args):
     #def publish_post(self, post_type, prodactDes, price, location):
@@ -91,6 +94,9 @@ class User:
         #     self.likes.append(user)
         #     self.notify_observers(f"{user.username} liked your post")
         #     print(f"notification to {self.name.username}: {user.username} liked your post")
+        for follower in self._follows:
+            follower.my_notification.append(f"{self.username} has a new post")
+
         return Post.create_post(self, post_type, content, price,location, available=True)
         #if post_type == "Text":
          #   post = TextPost(content)

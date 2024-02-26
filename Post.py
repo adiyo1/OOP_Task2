@@ -1,10 +1,11 @@
-#from User import User
+# from User import User
 # from enum import Enum
 from abc import ABC, abstractmethod
-import User
+# from User import User
 # from Observers import User
 from matplotlib import pyplot as plt
 
+import User
 
 # class PostType(Enum):
 #     TextPost = "TextPost"
@@ -106,8 +107,8 @@ class ImagePost(Post):
 class SalePost(Post):
     def __init__(self, name: User, content,price,location):
         super().__init__(name ,content,price,location)
-        print(f"{name.username} posted a product for sale:\n")
-        print(f"For sale! {content}, price:{price}, location:{location}\n")
+        print(f"{name.username} posted a product for sale:")
+        print(f"For sale! {content}, price: {price}, location: {location}\n")
         #self.available= True
 
     def __str__(self):
@@ -133,6 +134,6 @@ class SalePost(Post):
     def sold(self, password):
         if self.name.password== password:
             self.available= False
-            print(f"{self.name.username}'s product is sold\n")
+            print(f"{self.name.username}'s product is sold")
 
 

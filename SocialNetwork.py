@@ -96,8 +96,8 @@ class SocialNetwork:
         self.name = name
         self.network = {}
         self._users = {}
-        print(f"The social {self.name} was created!")
-        print("test1")
+        print(f"The social network {self.name} was created!")
+        #print("test1")
         self._initialized = True
 
     def __str__(self):
@@ -126,7 +126,7 @@ class SocialNetwork:
         # Create a new user and store it in the dictionary
         new_user = User(username, password)
         self._users[username] = new_user
-        print(f"User {username} successfully signed up.")
+        #print(f"User {username} successfully signed up.")
         return new_user
 
     def log_out(self, username):
