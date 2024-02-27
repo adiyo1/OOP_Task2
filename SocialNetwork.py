@@ -124,6 +124,7 @@ class SocialNetwork:
             print(f"Password {password} too short.")
             return None
         # Create a new user and store it in the dictionary
+        self.connect=True
         new_user = User(username, password)
         self._users[username] = new_user
         #print(f"User {username} successfully signed up.")
@@ -131,6 +132,7 @@ class SocialNetwork:
 
     def log_out(self, username):
         # if self._users.get(username).connect==True:
+            self.connect=False
             self._users[username].connect=False
             print(f"{username} disconnected")
         # else:
@@ -138,6 +140,7 @@ class SocialNetwork:
 
     def log_in(self, username,password):
         if password==self._users[username].password:
+            self.connect=True
             self._users[username].connect = True
             print(f"{username} connected")
         # if username in self._users:

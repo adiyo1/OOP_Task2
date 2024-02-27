@@ -30,7 +30,7 @@ class Post(ABC):
         name.notify_observer(f"{name.username} has a new post")
 
     def like(self, user:User):
-        #if user.username.connect== True:
+         if user.connect:
             if self.name.username == user.username:
                 self.likes.append(user)
                 return
@@ -42,20 +42,22 @@ class Post(ABC):
                 return
 
     def comment(self, user:User, comment):
-        if self.name.username == user.username:
-            self.comments.append(user)
-            return
-        else:
-            self.comments.append(user)
-            self.notify_observers(f"{user.username} commented on your post")
-            print(f"notification to {self.name.username}: {user.username} commented on your post: {comment}")
+        if user.connect:
+            if self.name.username == user.username:
+                self.comments.append(user)
+                return
+            else:
+                self.comments.append(user)
+                self.notify_observers(f"{user.username} commented on your post")
+                print(f"notification to {self.name.username}: {user.username} commented on your post: {comment}")
 
     def post(self, user:User, post):
-        if self.name.username == user.username:
-            return
-        for follower in self._follows:
-            self.post.append(user)
-            self.notify_newpost(f"{self.username} has a new post")
+        if user.connect:
+            if self.name.username == user.username:
+                return
+            for follower in self._follows:
+                self.post.append(user)
+                self.notify_newpost(f"{self.username} has a new post")
 
 
 
@@ -69,20 +71,22 @@ class Post(ABC):
         print("Shows picture")
 
     def create_post(self, post_type,content,price,location,available):
-        if post_type == "Text":
-            newpost1 = (TextPost(self, content))
-            newpost1.add_observer(self)
-            return newpost1
+        if self.connect:
+            if post_type == "Text":
+                newpost1 = (TextPost(self, content))
+                newpost1.add_observer(self)
+                return newpost1
 
-        if post_type == "Image":
-            newpost2 = (ImagePost(self, content))
-            newpost2.add_observer(self)
-            return newpost2
-        if post_type == "Sale":
-            newpost3 = (SalePost(self,content,price,location))
-            newpost3.add_observer(self)
-            return newpost3
-        return ValueError("Invalid post type")
+            if post_type == "Image":
+                newpost2 = (ImagePost(self, content))
+                newpost2.add_observer(self)
+                return newpost2
+            if post_type == "Sale":
+                newpost3 = (SalePost(self,content,price,location))
+                newpost3.add_observer(self)
+                return newpost3
+            return ValueError("Invalid post type")
+
 
 
 
@@ -91,11 +95,15 @@ class Post(ABC):
 class TextPost(Post):
     def __init__(self, name: User, content):
         super().__init__(name,content)
-        print(f"{name.username} poblished a post:")
+        print(f"{name.username} published a post:")
         print(f"{content}\n")
 
     def __str__(self):
         return f'{self.name.username} published a post:\n"{self.content}"\n'
+        #return f'{self.name.username} published a post:\n"{self.content}"\n'
+        #print(f"{self.name.username} published a post:")
+        #print(f'"{self.content}"\n')  # Enclose content in double quotes here
+
 
 class ImagePost(Post):
     def __init__(self, name: User, content):
@@ -117,7 +125,7 @@ class SalePost(Post):
     def __init__(self, name: User, content,price,location):
         super().__init__(name ,content,price,location)
         print(f"{name.username} posted a product for sale:")
-        print(f"For sale! {content}, price: {price}, location: {location}\n")
+        print(f"For sale! {content}, price: {price}, pickup from: {location}\n")
         #self.available= True
 
     def __str__(self):
@@ -130,7 +138,7 @@ class SalePost(Post):
     def discount(self, precent, password):
         if self.name.password== password:
            self.price= self.price- (self.price * precent/100)
-           print(f"Discount on {self.name.username} product! the new price is {self.price} ")
+           print(f"Discount on {self.name.username} product! the new price is: {self.price}")
 
     #@Override
     def print(Post):

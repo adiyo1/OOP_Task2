@@ -14,7 +14,7 @@ class User:
         self._follows = []
         self._likes = []
         self.observers= []
-        #self.connect= True
+        self.connect= True
         self.num_posts = 0
         self.posts = []
         self.my_notification = []
@@ -62,40 +62,43 @@ class User:
 
 
     def unfollow(self,username):
-        if self in username._follows:
-            username._follows.remove(self)
-            self.num_followers -=1
-            #self.my_notification.remove(username)
-            print(f"{self.username} unfollowed {username.username}")
+        if self.connect:
+            if self in username._follows:
+                username._follows.remove(self)
+                username.num_followers -=1
+                #self.my_notification.remove(username)
+                print(f"{self.username} unfollowed {username.username}")
 
 
     def follow(self, fusername):
-        newf = fusername.username
-        if self in fusername._follows:
-            print(f"User '{newf}' is already being followed.")
-            return None
+        if self.connect:
+            newf = fusername.username
+            if self in fusername._follows:
+                print(f"User '{newf}' is already being followed.")
+                return None
 
-        # Create a new user and store it in the dictionary
-        else:
-            fusername._follows.append(self)
-            #self._follows.append(fusername)
-            fusername.num_followers +=1
-            print(f"{self.username} started following {newf}")
-            return None
+            # Create a new user and store it in the dictionary
+            else:
+                fusername._follows.append(self)
+                #self._follows.append(fusername)
+                fusername.num_followers +=1
+                print(f"{self.username} started following {newf}")
+                return None
 
 #    def publish_post(self, post_type, content, *args):
     #def publish_post(self, post_type, prodactDes, price, location):
 
     def publish_post(self, post_type, content,price=None,location=None, available= True):
-        self.num_posts += 1
-        # def like(self, user: User):
-        #     self.likes.append(user)
-        #     self.notify_observers(f"{user.username} liked your post")
-        #     print(f"notification to {self.name.username}: {user.username} liked your post")
-        for follower in self._follows:
-            follower.my_notification.append(f"{self.username} has a new post")
+        if self.connect:
+            self.num_posts += 1
+            # def like(self, user: User):
+            #     self.likes.append(user)
+            #     self.notify_observers(f"{user.username} liked your post")
+            #     print(f"notification to {self.name.username}: {user.username} liked your post")
+            for follower in self._follows:
+                follower.my_notification.append(f"{self.username} has a new post")
 
-        return Post.create_post(self, post_type, content, price,location, available=True)
+            return Post.create_post(self, post_type, content, price,location, available=True)
         #if post_type == "Text":
          #   post = TextPost(content)
           #  #return TextPost(self)
