@@ -14,7 +14,7 @@ class User:
         self._follows = []
         self._likes = []
         self.observers= []
-        self.connect= True
+        #self.connect= True
         self.num_posts = 0
         self.posts = []
         self.my_notification = []

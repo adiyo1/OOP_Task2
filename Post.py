@@ -30,16 +30,25 @@ class Post(ABC):
         name.notify_observer(f"{name.username} has a new post")
 
     def like(self, user:User):
-        if self.name.username == user.username:
-            return
-        self.likes.append(user)
-        self.notify_observers(f"{user.username} liked your post")
-        print(f"notification to {self.name.username}: {user.username} liked your post")
+        #if user.username.connect== True:
+            if self.name.username == user.username:
+                self.likes.append(user)
+                return
+            if user.username not in self.likes:
+                self.likes.append(user)
+                self.notify_observers(f"{user.username} liked your post")
+                print(f"notification to {self.name.username}: {user.username} liked your post")
+            else:
+                return
 
     def comment(self, user:User, comment):
-        self.comments.append(user)
-        self.notify_observers(f"{user.username} commented on your post")
-        print(f"notification to {self.name.username}: {user.username} commented on your post: {comment}")
+        if self.name.username == user.username:
+            self.comments.append(user)
+            return
+        else:
+            self.comments.append(user)
+            self.notify_observers(f"{user.username} commented on your post")
+            print(f"notification to {self.name.username}: {user.username} commented on your post: {comment}")
 
     def post(self, user:User, post):
         if self.name.username == user.username:
