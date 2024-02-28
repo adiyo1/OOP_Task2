@@ -35,6 +35,15 @@ def main():
 
     # # Creating likes and comments
     p2.like(u4)
+    p2.like(u4)
+    p2.like(u4)
+    p1.like(u1)
+    i = 0  # Initialize i outside the loop
+    for a in p2.likes:
+        i += 1  # Use += for incrementing within the loop
+    print("num of likes:")
+    print(i)
+    # print(p1.likes.size)
     p1.like(u4)
     p1.like(u2)
     p1.comment(u3, "Columbus's bold journey!")

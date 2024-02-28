@@ -32,13 +32,14 @@ class Post(ABC):
     def like(self, user:User):
          if user.connect:
             if self.name.username == user.username:
-                self.likes.append(user)
+                if user not in self.likes:
+                    self.likes.append(user)
                 return
-            if user.username not in self.likes:
-                self.likes.append(user)
-                self.notify_observers(f"{user.username} liked your post")
-                print(f"notification to {self.name.username}: {user.username} liked your post")
             else:
+                if user not in self.likes:
+                    self.likes.append(user)
+                    self.notify_observers(f"{user.username} liked your post")
+                    print(f"notification to {self.name.username}: {user.username} liked your post")
                 return
 
     def comment(self, user:User, comment):
