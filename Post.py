@@ -96,7 +96,7 @@ class TextPost(Post):
     def __init__(self, name: User, content):
         super().__init__(name,content)
         print(f"{name.username} published a post:")
-        print(f"{content}\n")
+        print(f'"{content}"\n')
 
     def __str__(self):
         return f'{self.name.username} published a post:\n"{self.content}"\n'
