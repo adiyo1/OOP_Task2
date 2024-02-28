@@ -1,21 +1,11 @@
-# from User import User
-# from enum import Enum
+
 from abc import ABC, abstractmethod
-# from User import User
-# from Observers import User
+
 from matplotlib import pyplot as plt
 
 import User
 
-# class PostType(Enum):
-#     TextPost = "TextPost"
-#     ImagePost = "ImagePost"
-#     SalePost = "SalePost"
 
-#class Post(ABC):
-#    @abstractmethod
-#    def drive(self):
-#        pass
 class Post(ABC):
     def __init__(self,name:User ,content, price=None, location= None, available= True):
         self.content = content
@@ -101,9 +91,7 @@ class TextPost(Post):
 
     def __str__(self):
         return f'{self.name.username} published a post:\n"{self.content}"\n'
-        #return f'{self.name.username} published a post:\n"{self.content}"\n'
-        #print(f"{self.name.username} published a post:")
-        #print(f'"{self.content}"\n')  # Enclose content in double quotes here
+
 
 
 class ImagePost(Post):
@@ -120,8 +108,7 @@ class ImagePost(Post):
     def __str__(self):
         return f"{self.name.username} posted a picture\n"
 
-        # def __str__(self):
-        #     return f"{self.name.name} posted a picture\n"
+
 class SalePost(Post):
     def __init__(self, name: User, content,price,location):
         super().__init__(name ,content,price,location)

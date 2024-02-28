@@ -1,9 +1,6 @@
 from Post import Post, TextPost, ImagePost, SalePost
 from abc import ABCMeta, abstractmethod
 
-# User.py
-
-# from Observers import NewPostObserver, LikeObserver, CommentObserver
 
 class User:
 
@@ -19,9 +16,7 @@ class User:
         self.posts = []
         self.my_notification = []
         self.num_followers = 0
-        # self._new_post_observer = NewPostObserver(self, self._follows)
-        # self._like_observer = LikeObserver(self)
-        # self._comment_observer = CommentObserver(self)
+
 
 
     def __str__(self):
@@ -42,11 +37,7 @@ class User:
         # Call the function to print notifications
         # print_notifications()
 
-    #class User:
- #   def __init__(self, username, password):
-  #      self.username = username
-   #     self.password = password
-    #    self._follows = []
+
 
     def notify_followers(self, post):
         for follower in self._follows:
@@ -85,40 +76,17 @@ class User:
                 print(f"{self.username} started following {newf}")
                 return None
 
-#    def publish_post(self, post_type, content, *args):
-    #def publish_post(self, post_type, prodactDes, price, location):
+
 
     def publish_post(self, post_type, content,price=None,location=None, available= True):
         if self.connect:
             self.num_posts += 1
-            # def like(self, user: User):
-            #     self.likes.append(user)
-            #     self.notify_observers(f"{user.username} liked your post")
-            #     print(f"notification to {self.name.username}: {user.username} liked your post")
+
             for follower in self._follows:
                 follower.my_notification.append(f"{self.username} has a new post")
 
             return Post.create_post(self, post_type, content, price,location, available=True)
-        #if post_type == "Text":
-         #   post = TextPost(content)
-          #  #return TextPost(self)
-           # print(self.username +" published a post:")
-            #print(content)
-        #elif post_type == "Image":
-            #if len(args) != 1:
-             #   raise ValueError("Image post requires one argument (image URL)")
-            #post = ImagePost(content)
-           # print()
-            #print(self.username+ " posted a picture")
-        #elif post_type == "Sale":
-            #if len(args) != 2:
-             #   raise ValueError("Sale post requires two arguments (price, location)")
 
-            #post = SalePost(content)
-        #else:
-         #   raise ValueError("Invalid post type")
-        #self._posts.append(post)
-        #return post
 
 
 
